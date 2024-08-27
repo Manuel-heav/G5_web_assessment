@@ -9,6 +9,7 @@ interface BlogsState {
   error: string | null;
   currentPage: number;
   postsPerPage: number;
+  searchQuery: string;
 }
 
 const initialState: BlogsState = {
@@ -18,6 +19,7 @@ const initialState: BlogsState = {
   error: null,
   currentPage: 1,
   postsPerPage: 5,
+  searchQuery: "",
 };
 
 export const fetchBlogs = createAsyncThunk("blogs/fetchBlogs", async () => {
@@ -33,9 +35,24 @@ const blogsSlice = createSlice({
   reducers: {
     setCurrentPage(state, action) {
       state.currentPage = action.payload;
-      state.displayedBlogs = state.blogs.slice(
+      const filteredBlogs = state.searchQuery
+        ? state.blogs.filter((blog) =>
+            blog.title.toLowerCase().includes(state.searchQuery.toLowerCase())
+          )
+        : state.blogs;
+      state.displayedBlogs = filteredBlogs.slice(
         (action.payload - 1) * state.postsPerPage,
         action.payload * state.postsPerPage
+      );
+    },
+    setSearchQuery(state, action) {
+      state.searchQuery = action.payload;
+      const filteredBlogs = state.blogs.filter((blog) =>
+        blog.title.toLowerCase().includes(action.payload.toLowerCase())
+      );
+      state.displayedBlogs = filteredBlogs.slice(
+        (state.currentPage - 1) * state.postsPerPage,
+        state.currentPage * state.postsPerPage
       );
     },
   },
@@ -48,8 +65,10 @@ const blogsSlice = createSlice({
       .addCase(fetchBlogs.fulfilled, (state, action) => {
         state.loading = false;
         state.blogs = action.payload;
-        // Set the initial page of displayed blogs
-        state.displayedBlogs = action.payload.slice(0, state.postsPerPage);
+        const filteredBlogs = action.payload.filter((blog) =>
+          blog.title.toLowerCase().includes(state.searchQuery.toLowerCase())
+        );
+        state.displayedBlogs = filteredBlogs.slice(0, state.postsPerPage);
       })
       .addCase(fetchBlogs.rejected, (state, action) => {
         state.loading = false;
@@ -58,5 +77,5 @@ const blogsSlice = createSlice({
   },
 });
 
-export const { setCurrentPage } = blogsSlice.actions;
+export const { setCurrentPage, setSearchQuery } = blogsSlice.actions;
 export default blogsSlice.reducer;
