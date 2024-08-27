@@ -91,5 +91,4 @@ This project is part of the A2SV Developer Readiness Assessment. It involves cre
    ```
 
 ### Deployment
-
-    Visit the deployed application [here](https://blog-app-zeta-rosy.vercel.app/)
+Visit the deployed application [here](https://blog-app-zeta-rosy.vercel.app/)
