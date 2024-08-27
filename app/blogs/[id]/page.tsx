@@ -7,6 +7,7 @@ import { BlogPost } from "@/types";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import DOMPurify from "dompurify";
+import RecCard from "@/components/RecCard";
 
 // author
 // :
@@ -149,6 +150,15 @@ const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
           </div>
         </div>
       )}
+
+      <div className="mt-24">
+        <h1 className="font-bold mb-4 text-xl">Related Blogs</h1>
+        <div className="grid grid-cols-3 gap-8">
+          <RecCard />
+          <RecCard />
+          <RecCard />
+        </div>
+      </div>
     </div>
   );
 };
