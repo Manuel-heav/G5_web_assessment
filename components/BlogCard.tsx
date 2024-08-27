@@ -27,9 +27,9 @@ const BlogCard = ({
   tags,
 }: BlogCardProps) => {
   const sanitizedHtml = DOMPurify.sanitize(description);
-
+  console.log(id);
   return (
-    <Link href={`/blogs/${id}}`} className="p-2 w-[80%]">
+    <Link href={`/blogs/${id}`} className="p-2 w-[80%]">
       <hr className="mb-4" />
       <div className="flex items-end gap-2 mb-6">
         <Avatar>
