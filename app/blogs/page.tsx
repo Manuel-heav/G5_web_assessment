@@ -3,9 +3,9 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hook";
 import { fetchBlogs, setCurrentPage } from "@/lib/redux/slices/blogsSlice";
-import Link from "next/link";
 import Homeheader from "@/components/Homeheader";
 import BlogCard from "@/components/BlogCard";
+import BlogCardSkeleton from "@/components/BlogSkeleteon";
 
 export default function BlogPage() {
   const dispatch = useAppDispatch();
@@ -23,9 +23,6 @@ export default function BlogPage() {
   const handlePageChange = (page: number) => {
     dispatch(setCurrentPage(page));
   };
-  console.log(blogs);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
 
   const totalPages = Math.ceil(blogs.length / postsPerPage);
 
@@ -33,19 +30,23 @@ export default function BlogPage() {
     <div>
       <Homeheader />
       <div className="flex flex-col gap-4 mt-8 justify-center items-center">
-        {displayedBlogs.map((blog) => (
-          <BlogCard
-            id={blog._id}
-            title={blog.title}
-            key={blog._id}
-            name={blog.author?.name}
-            profileImage={blog.author?.image}
-            image={blog.image}
-            description={blog.description}
-            tags={blog.tags}
-            createdAt={blog.createdAt}
-          />
-        ))}
+        {loading
+          ? Array.from({ length: 5 }).map((_, index) => (
+              <BlogCardSkeleton key={index} />
+            ))
+          : displayedBlogs.map((blog) => (
+              <BlogCard
+                id={blog._id}
+                title={blog.title}
+                key={blog._id}
+                name={blog.author?.name}
+                profileImage={blog.author?.image}
+                image={blog.image}
+                description={blog.description}
+                tags={blog.tags}
+                createdAt={blog.createdAt}
+              />
+            ))}
       </div>
       <div className="pagination flex items-center justify-center gap-4 mt-6">
         <button
