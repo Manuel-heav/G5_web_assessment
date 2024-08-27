@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import DOMPurify from "dompurify";
 import RecCard from "@/components/RecCard";
+import BlogDetailPageSkeleton from "@/components/BlogDetailPageSkeleton";
 
 // author
 // :
@@ -99,9 +100,9 @@ const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
   if (error) return <p>Error: {error}</p>;
 
   const sanitizedHtml = DOMPurify.sanitize(blog?.description || "");
-
+  if (loading) return <BlogDetailPageSkeleton />;
   return (
-    <div className="flex flex-col justify-center items-center px-24">
+    <div className="flex flex-col justify-center items-center md:px-24">
       <div className="flex flex-col justify-center items-center">
         <h1
           className="text-2xl font-bold"
@@ -144,7 +145,7 @@ const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
 
           <div className="flex justify-center">
             <p
-              className="text-[#737373] mt-5 w-[70%]"
+              className="text-[#737373] mt-5 md:w-[70%]"
               dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
             />
           </div>
@@ -153,7 +154,7 @@ const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
 
       <div className="mt-24">
         <h1 className="font-bold mb-4 text-xl">Related Blogs</h1>
-        <div className="grid grid-cols-3 gap-8">
+        <div className="md:grid grid-cols-3 gap-8">
           <RecCard />
           <RecCard />
           <RecCard />

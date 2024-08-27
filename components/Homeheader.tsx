@@ -11,10 +11,10 @@ const Homeheader: React.FC = () => {
   };
 
   return (
-    <div className="w-[60%] flex justify-between items-center mb-4">
+    <div className="w-[60%] md:flex justify-between items-center mb-4">
       <h1 className="font-bold text-xl">Blogs</h1>
 
-      <div className="flex gap-2">
+      <div className="hidden md:flex gap-2">
         <input
           type="text"
           value={searchQuery}

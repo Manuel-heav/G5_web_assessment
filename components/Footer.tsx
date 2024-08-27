@@ -6,8 +6,8 @@ const Footer = () => {
   return (
     <footer className="mt-24 ">
       <hr />
-      <div className="grid grid-cols-6 pt-24 mb-8">
-        <div className="col-span-3 flex items-center gap-5">
+      <div className="md:grid grid-cols-6 pt-24 mb-8">
+        <div className="col-span-3 md:flex items-center gap-5">
           <Image
             src="/images/footer.png"
             height={250}
@@ -15,12 +15,12 @@ const Footer = () => {
             alt="Footer Image"
           />
 
-          <div className="flex flex-col gap-8 items-start">
+          <div className="md:flex flex-col gap-8 items-start">
             <p className="font-bold w-[80%]">
               Get involved in improving tech education in Africa!
             </p>
 
-            <button className="px-16 py-3 bg-primaryBlue rounded-2xl text-white font-semibold">
+            <button className="px-16 py-3 bg-primaryBlue rounded-2xl text-white font-semibold mb-5 md:mb-0">
               Support Us
             </button>
           </div>
@@ -50,7 +50,7 @@ const Footer = () => {
       </div>
       <hr />
 
-      <div className="flex items-center justify-between mt-4">
+      <div className="md:flex items-center justify-between mt-4">
         <p>&copy; 2024 Africa to Silicon Valley, Inc. All right reserved.</p>
         <div className="flex gap-5">
           <TwitterIcon />

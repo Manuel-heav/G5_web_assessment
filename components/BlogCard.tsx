@@ -26,10 +26,19 @@ const BlogCard = ({
   description,
   tags,
 }: BlogCardProps) => {
-  const sanitizedHtml = DOMPurify.sanitize(description);
+  const truncateDescription = (description: string) => {
+    if (description.length > 200) {
+      return `${description.substring(0, 200)}...`;
+    }
+
+    return description;
+  };
+  const updatedDescription = truncateDescription(description);
+  let sanitizedHtml = DOMPurify.sanitize(updatedDescription);
+
   console.log(id);
   return (
-    <Link href={`/blogs/${id}`} className="p-2 w-[80%]">
+    <Link href={`/blogs/${id}`} className="p-2 md:w-[80%]">
       <hr className="mb-4" />
       <div className="flex items-end gap-2 mb-6">
         <Avatar>
@@ -48,7 +57,7 @@ const BlogCard = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-12">
+      <div className="md:grid grid-cols-3 gap-12">
         <div className="col-span-2 pb-4">
           <h1 className="text-xl font-bold mb-4">{title}</h1>
           <p
@@ -70,7 +79,7 @@ const BlogCard = ({
             src={image}
             height={400}
             width={300}
-            className="fit-content rounded-xl"
+            className="hidden md:flex fit-content rounded-xl"
             alt="Blog Image"
           />
         </div>
