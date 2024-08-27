@@ -3,7 +3,9 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hook";
 import { fetchBlogs, setCurrentPage } from "@/lib/redux/slices/blogsSlice";
-import Link from "next/link";
+import Homeheader from "@/components/Homeheader";
+import BlogCard from "@/components/BlogCard";
+import BlogCardSkeleton from "@/components/BlogSkeleteon";
 
 export default function BlogPage() {
   const dispatch = useAppDispatch();
@@ -22,32 +24,43 @@ export default function BlogPage() {
     dispatch(setCurrentPage(page));
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-
   const totalPages = Math.ceil(blogs.length / postsPerPage);
 
   return (
     <div>
-      {displayedBlogs.map((blog) => (
-        <div key={blog._id}>
-          <img src={blog.image} alt={blog.title} />
-          <h2>{blog.title}</h2>
-          <p>{blog.description}</p>
-          <Link href={`/blog/${blog._id}`}>Read more</Link>
-        </div>
-      ))}
-      <div className="pagination">
+      <Homeheader />
+      <div className="flex flex-col gap-4 mt-8 justify-center items-center">
+        {loading
+          ? Array.from({ length: 5 }).map((_, index) => (
+              <BlogCardSkeleton key={index} />
+            ))
+          : displayedBlogs.map((blog) => (
+              <BlogCard
+                id={blog._id}
+                title={blog.title}
+                key={blog._id}
+                name={blog.author?.name}
+                profileImage={blog.author?.image}
+                image={blog.image}
+                description={blog.description}
+                tags={blog.tags}
+                createdAt={blog.createdAt}
+              />
+            ))}
+      </div>
+      <div className="pagination flex items-center justify-center gap-4 mt-6">
         <button
+          className="pagination-button bg-[#264FAD] text-white hover:bg-[#1e3a8a] disabled:bg-[#cbd5e1] disabled:cursor-not-allowed"
           disabled={currentPage === 1}
           onClick={() => handlePageChange(currentPage - 1)}
         >
           Previous
         </button>
-        <span>
+        <span className="text-gray-700">
           Page {currentPage} of {totalPages}
         </span>
         <button
+          className="pagination-button bg-[#264FAD] text-white hover:bg-[#1e3a8a] disabled:bg-[#cbd5e1] disabled:cursor-not-allowed"
           disabled={currentPage === totalPages}
           onClick={() => handlePageChange(currentPage + 1)}
         >
