@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email" }),
@@ -48,6 +49,7 @@ const SignIn = () => {
       );
       console.log(response);
       if (response.status === 200) {
+        Cookies.set("blogToken", response.data.token);
         router.push("/blogs");
       } else {
         console.log(response);
