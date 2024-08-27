@@ -17,10 +17,9 @@ const initialState: BlogsState = {
   loading: false,
   error: null,
   currentPage: 1,
-  postsPerPage: 10, // Number of posts per page
+  postsPerPage: 5,
 };
 
-// Fetch all blogs action
 export const fetchBlogs = createAsyncThunk("blogs/fetchBlogs", async () => {
   const response = await axios.get<BlogPost[]>(
     "https://a2sv-backend.onrender.com/api/blogs"

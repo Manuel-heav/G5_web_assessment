@@ -11,7 +11,6 @@ interface BlogDetailPageProps {
   };
 }
 const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
-  const router = useRouter();
   const { id } = params;
   const [blog, setBlog] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
