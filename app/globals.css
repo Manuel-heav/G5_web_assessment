@@ -68,4 +68,15 @@
     @apply bg-background text-foreground;
     font-family: "Montserrat", sans-serif;
   }
+  .pagination-button {
+    @apply px-4 py-2 rounded-md font-semibold transition-colors;
+  }
+  
+  .pagination-button:hover {
+    @apply bg-[#1e3a8a];
+  }
+  
+  .pagination-button:disabled {
+    @apply bg-[#cbd5e1] text-gray-500 cursor-not-allowed;
+  }
 }

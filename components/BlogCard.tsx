@@ -38,7 +38,7 @@ const BlogCard = ({
         </Avatar>
 
         <div>
-          <p className="font-bold">
+          <p className="font-bold pb-1">
             {name ? name : "John"} .{" "}
             <span className="text-xs text-[#9C9C9C] font-normal">
               {convertDateFormatToLocale(createdAt)}

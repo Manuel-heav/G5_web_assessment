@@ -32,14 +32,6 @@ export default function BlogPage() {
   return (
     <div>
       <Homeheader />
-      {/* name: string;
-  profileImage: string;
-  createdAt: string;
-  title: string;
-  image: string;
-  description: string;
-  tags: string[]; */}
-
       <div className="flex flex-col gap-4 mt-8 justify-center items-center">
         {displayedBlogs.map((blog) => (
           <BlogCard
@@ -55,26 +47,19 @@ export default function BlogPage() {
           />
         ))}
       </div>
-      {/* {displayedBlogs.map((blog) => (
-        <div key={blog._id}>
-          <img src={blog.image} alt={blog.title} />
-          <h2>{blog.title}</h2>
-          <p>{blog.description}</p>
-          <Link href={`/blog/${blog._id}`}>Read more</Link>
-        </div>
-      ))}
-        */}
-      <div className="pagination">
+      <div className="pagination flex items-center justify-center gap-4 mt-6">
         <button
+          className="pagination-button bg-[#264FAD] text-white hover:bg-[#1e3a8a] disabled:bg-[#cbd5e1] disabled:cursor-not-allowed"
           disabled={currentPage === 1}
           onClick={() => handlePageChange(currentPage - 1)}
         >
           Previous
         </button>
-        <span>
+        <span className="text-gray-700">
           Page {currentPage} of {totalPages}
         </span>
         <button
+          className="pagination-button bg-[#264FAD] text-white hover:bg-[#1e3a8a] disabled:bg-[#cbd5e1] disabled:cursor-not-allowed"
           disabled={currentPage === totalPages}
           onClick={() => handlePageChange(currentPage + 1)}
         >
