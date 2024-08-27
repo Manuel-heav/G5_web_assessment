@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hook";
 import { fetchBlogs, setCurrentPage } from "@/lib/redux/slices/blogsSlice";
 import Link from "next/link";
+import Homeheader from "@/components/Homeheader";
 
 export default function BlogPage() {
   const dispatch = useAppDispatch();
@@ -29,7 +30,8 @@ export default function BlogPage() {
 
   return (
     <div>
-      {displayedBlogs.map((blog) => (
+      <Homeheader />
+      {/* {displayedBlogs.map((blog) => (
         <div key={blog._id}>
           <img src={blog.image} alt={blog.title} />
           <h2>{blog.title}</h2>
@@ -53,7 +55,7 @@ export default function BlogPage() {
         >
           Next
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
