@@ -67,7 +67,10 @@ const BlogCard = ({
 
           <div className="flex gap-4 mt-4">
             {tags.map((tag) => (
-              <div className="bg-[#F5F5F5] px-4 py-2 rounded-full text-[#8E8E8E]">
+              <div
+                key={tag}
+                className="bg-[#F5F5F5] px-4 py-2 rounded-full text-[#8E8E8E]"
+              >
                 {tag}
               </div>
             ))}
